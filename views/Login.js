@@ -1,3 +1,4 @@
+// Imports React native
 import {
   SafeAreaView,
   TextInput,
@@ -6,18 +7,27 @@ import {
   View,
   StyleSheet,
 } from "react-native";
+
+// Import react
 import { useState, useContext } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { LogContext } from "../App";
 
+// Context
+import { LogContext } from "../App";
+import reactDom from "react-dom";
+
+// Render Login.js
 export default function Login({ navigation }) {
+  // State Login
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // State du context
   const logState = useContext(LogContext);
 
+  // Fonction click login
   const handleSubmit = () => {
     if (email.length > 5 && password.length > 5) {
       //   setValidation(true);
@@ -27,7 +37,7 @@ export default function Login({ navigation }) {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder="Enter your email"
@@ -39,22 +49,25 @@ export default function Login({ navigation }) {
         secureTextEntry
         onChangeText={setPassword}
       />
-      <TouchableOpacity onPress={handleSubmit}>
+      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
         <Text>Submit</Text>
       </TouchableOpacity>
       {logState.isLoggedIn ? (
         <View>
-          <Text>Formulaire soumis</Text>
+          <Text style={styles.valid}>Formulaire soumis</Text>
         </View>
       ) : (
         <View>
-          <Text>Entrez un mail et un mot de passe valides</Text>
+          <Text style={styles.invalid}>
+            Entrez un mail et un mot de passe valides
+          </Text>
         </View>
       )}
     </SafeAreaView>
   );
 }
 
+// STYLES
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -68,5 +81,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 5,
     padding: 10,
+  },
+
+  button: {
+    backgroundColor: "rgba(100, 150, 255, 0.9)",
+    padding: 15,
+    borderRadius: 10,
+    margin: 10,
+  },
+
+  valid: {
+    color: "green",
+  },
+
+  invalid: {
+    color: "red",
   },
 });

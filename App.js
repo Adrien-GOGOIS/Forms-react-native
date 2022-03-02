@@ -1,17 +1,25 @@
+// imports react native
 import { StyleSheet } from "react-native";
+
+// imports react
 import { createContext, useState } from "react";
 
+// react navigation
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+const Stack = createNativeStackNavigator();
+
+// Components
 import Home from "./views/Home";
 import Login from "./views/Login";
 
+// context
 export const LogContext = createContext();
 
-const Stack = createNativeStackNavigator();
-
+// APP
 export default function App() {
+  // State
   const [isLoggedIn, setLoggedIn] = useState(false);
   const value = {
     isLoggedIn: isLoggedIn,
@@ -30,6 +38,7 @@ export default function App() {
   );
 }
 
+// STYLES
 const styles = StyleSheet.create({
   container: {
     flex: 1,
