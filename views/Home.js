@@ -1,4 +1,5 @@
 import { ScrollView, Text } from "react-native";
+import { TouchableOpacity } from "react-native";
 // import { useNavigate } from "react-router-native";
 
 export default function Home() {
@@ -7,6 +8,9 @@ export default function Home() {
   return (
     <ScrollView>
       <Text>HOME</Text>
+      <TouchableOpacity>
+        <Text></Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }

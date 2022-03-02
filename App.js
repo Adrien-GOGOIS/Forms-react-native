@@ -1,29 +1,25 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView, View } from "react-native";
 import { TouchableOpacity, Text } from "react-native";
-import { NativeRouter, Routes, Route, useNavigate } from "react-router-native";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Home from "./views/Home";
 import Login from "./views/Login";
 
+const Stack = createNativeStackNavigator();
+
 export default function App() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => navigate("/login")}>
-        <Text>LOGIN</Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
-
-      <NativeRouter>
-        <Routes>
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/" element={<App />} />
-        </Routes>
-      </NativeRouter>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Login" component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

@@ -7,19 +7,22 @@ import {
   StyleSheet,
 } from "react-native";
 import { useState } from "react";
-import { useNavigate } from "react-router-native";
+// import { useNavigate } from "react-router-native";
 
-export default function Login() {
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validation, setValidation] = useState(false);
 
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
   const handleSubmit = () => {
     if (email.length > 5 && password.length > 5) {
       setValidation(true);
-      navigate("/home");
+      navigation.navigate("Home");
     }
   };
   return (
