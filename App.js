@@ -1,6 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, SafeAreaView, View } from "react-native";
-import { TouchableOpacity, Text } from "react-native";
+import { StyleSheet } from "react-native";
+import { createContext, useState } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -8,18 +7,26 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./views/Home";
 import Login from "./views/Login";
 
+export const LogContext = createContext();
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  // const navigate = useNavigate();
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const value = {
+    isLoggedIn: isLoggedIn,
+    setLoggedIn: setLoggedIn,
+  };
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Login" component={Login} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <LogContext.Provider value={value}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Login" component={Login} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </LogContext.Provider>
   );
 }
 

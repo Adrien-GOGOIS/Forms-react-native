@@ -6,25 +6,26 @@ import {
   View,
   StyleSheet,
 } from "react-native";
-import { useState } from "react";
-// import { useNavigate } from "react-router-native";
+import { useState, useContext } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { LogContext } from "../App";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [validation, setValidation] = useState(false);
 
-  //   const navigate = useNavigate();
+  const logState = useContext(LogContext);
 
   const handleSubmit = () => {
     if (email.length > 5 && password.length > 5) {
-      setValidation(true);
+      //   setValidation(true);
+      logState.setLoggedIn(true);
       navigation.navigate("Home");
     }
   };
+
   return (
     <SafeAreaView>
       <TextInput
@@ -41,7 +42,7 @@ export default function Login({ navigation }) {
       <TouchableOpacity onPress={handleSubmit}>
         <Text>Submit</Text>
       </TouchableOpacity>
-      {validation ? (
+      {logState.isLoggedIn ? (
         <View>
           <Text>Formulaire soumis</Text>
         </View>
