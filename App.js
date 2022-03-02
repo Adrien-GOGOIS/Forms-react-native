@@ -1,28 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-web';
+// import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { TouchableOpacity, TextInput } from "react-native";
 
 export default function App() {
-
-  const handleClick = () => {
-    console.log("SUBMITTED")
-  }
+  const handleSubmit = () => {
+    console.log("SUBMITTED");
+  };
 
   return (
-    <View style={styles.container}>
-      <TextInput placeholder='Enter your name' onValueChange={}  />
-      <TextInput placeholder='Enter your password' onValueChange={} secureTextEntry />
-      <TouchableOpacity onPress={handleClick}><Text>Submit</Text></TouchableOpacity>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <TextInput placeholder="Enter your name" />
+      <TextInput placeholder="Enter your password" secureTextEntry />
+      <TouchableOpacity onPress={handleSubmit}>
+        <Text>Submit</Text>
+      </TouchableOpacity>
+      {/* <StatusBar style="auto" /> */}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  input: {
+    borderWidth: 1,
+    borderRadius: 10,
   },
 });
