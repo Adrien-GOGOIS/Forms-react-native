@@ -1,45 +1,28 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import { TouchableOpacity, TextInput } from "react-native";
-import { useState } from "react";
+import { StyleSheet, SafeAreaView } from "react-native";
+import { TouchableOpacity, Text } from "react-native";
+import { NativeRouter, Routes, Route, useNavigate } from "react-router-native";
+
+import Home from "./views/Home";
+import Login from "./views/Login";
 
 export default function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [validation, setValidation] = useState(false);
-
-  const handleSubmit = () => {
-    if (email.length > 5 && password.length > 5) {
-      setValidation(true);
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <SafeAreaView style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your email"
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your password"
-        secureTextEntry
-        onChangeText={setPassword}
-      />
-      <TouchableOpacity onPress={handleSubmit}>
-        <Text>Submit</Text>
+      <TouchableOpacity onPress={() => navigate("/login")}>
+        <Text>LOGIN</Text>
       </TouchableOpacity>
-      {validation ? (
-        <View>
-          <Text>Formulaire soumis</Text>
-        </View>
-      ) : (
-        <View>
-          <Text>Entrez un mail et un mot de passe valides</Text>
-        </View>
-      )}
       <StatusBar style="auto" />
+
+      <NativeRouter>
+        <Routes>
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/" element={<App />} />
+        </Routes>
+      </NativeRouter>
     </SafeAreaView>
   );
 }
