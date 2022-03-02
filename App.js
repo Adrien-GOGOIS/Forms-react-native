@@ -4,12 +4,12 @@ import { TouchableOpacity, TextInput } from "react-native";
 import { useState } from "react";
 
 export default function App() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validation, setValidation] = useState(false);
 
   const handleSubmit = () => {
-    if (username.length > 5 && password.length > 5) {
+    if (email.length > 5 && password.length > 5) {
       setValidation(true);
     }
   };
@@ -18,8 +18,8 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Enter your name"
-        onChangeText={setUsername}
+        placeholder="Enter your email"
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
@@ -36,7 +36,7 @@ export default function App() {
         </View>
       ) : (
         <View>
-          <Text>Entrez un pseudo et un mot de passe valides</Text>
+          <Text>Entrez un mail et un mot de passe valides</Text>
         </View>
       )}
       <StatusBar style="auto" />
